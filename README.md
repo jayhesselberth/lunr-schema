@@ -1,4 +1,4 @@
-# lunr-schema
+# lunr-schema
 
 **WORK IN PROGRESS**
 
@@ -20,11 +20,11 @@ The current expected format for Lunr 2.x is a single JSON object with the follow
 
 Currently this is just a string with the version of Lunr that created the index. This may change to the version of the schema being used.
 
-## Fields
+### Fields
 
 A list of the names of the indexed fields
 
-## Field Vectors
+### Field Vectors
 
 In Lunr documents are split into fields. There will be a vector for every field in every document. Document fields are stored as a vector space, where each token in the index has a specific dimension, and the value of that dimension is the weight of that token in that field/document.
 
@@ -38,20 +38,20 @@ Vectors are represented as a single array. This is specific to the implementatio
 
 So the even indexed values are the dimensions, and the odd indexed values are the weights.
 
-## Inverted Index
+### Inverted Index
 
 A list of tuples of term to index entries. This is a list so that no sorting needs to be done during deserialisation. As such it **must** be sorted by the term. If not sorted it will cause errors during deserialisation.
 
-### Index Entry
+#### Index Entry
 
-An index entry is an JSON object that **must** contain a property named `_index` which should be unique for this term. It is the dimension used in the vector space representation.
+An index entry is an JSON object that **must** contain a property named `_index` that should be unique for this term. It is the dimension used in the vector space representation.
 
 The other properties should be field names, and the values are posting objects.
 
 ### Posting
 
-A posting is a map from document reference to metadata. By default no metadata is captured during indexing and so the metadata can be an empty object. Otherwise this is a key value store of metadata key to metadata value.
+A posting is a map from document reference to metadata. By default, no metadata is captured during indexing and so the metadata can be an empty object. Otherwise this is a key value store of metadata key to metadata value.
 
-## Pipeline
+### Pipeline
 
 An ordered list of pipeline function names that should be added to the search pipeline. By default this will include just the stemmer as "stemmer".
